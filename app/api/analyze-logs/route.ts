@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       success: true,
       analysis,
     });
-  } catch (error) {
+  } catch {
     return Response.json(
       {
         success: false,
