@@ -1,3 +1,34 @@
+# AI Production Support Copilot
+
+A production-support focused AI engineering project that helps analyze application logs, detect repeated failures, identify affected services/endpoints, and generate debugging insights.
+
+## 1: Log Error Analyzer
+
+Implemented a rule-based log analyzer using Next.js, TypeScript, and API routes.
+
+### Features
+- Paste application logs
+- Detect ERROR and WARN logs
+- Count timeouts, failures, and exceptions
+- Extract affected services
+- Extract failed API endpoints
+- Extract IDs such as order_id, userId, and payment_id
+- Detect repeated log messages
+- Generate suggested debugging actions
+
+## Tech Stack
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Vercel
+
+## Planned Features
+- RAG-based similar incident search
+- Supabase PostgreSQL and pgvector
+- Gemini API-powered RCA summary
+- Agent-style root cause analysis workflow
+
+----
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
