@@ -1,5 +1,10 @@
 # AI Production Support Copilot
 
+Live Demo: https://ai-production-support-copilot.vercel.app/
+
+GitHub Repository: https://github.com/shreya0812/ai-production-support-copilot
+
+
 A production-support focused AI engineering project that helps analyze application logs, detect repeated failures, identify affected services/endpoints, and generate debugging insights.
 
 ## 1: Log Error Analyzer
