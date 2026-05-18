@@ -1,38 +1,98 @@
 # AI Production Support Copilot
 
+A deployed AI-powered production support tool that analyzes application logs, detects repeated failures, retrieves similar historical incidents using RAG, and generates evidence-backed root cause analysis reports.
+
+## Live Links
+
 Live Demo: https://ai-production-support-copilot.vercel.app/
 
 GitHub Repository: https://github.com/shreya0812/ai-production-support-copilot
 
+## Project Overview
 
-A production-support focused AI engineering project that helps analyze application logs, detect repeated failures, identify affected services/endpoints, and generate debugging insights.
+AI Production Support Copilot is a practical AI engineering project built to simulate how software teams can debug production issues faster.
 
-## 1: Log Error Analyzer
+The app allows a user to paste raw application logs and perform three actions:
 
-Implemented a rule-based log analyzer using Next.js, TypeScript, and API routes.
+1. Analyze logs using rule-based parsing
+2. Find similar historical incidents using RAG
+3. Generate a structured root cause analysis report using an AI workflow
 
-### Features
-- Paste application logs
-- Detect ERROR and WARN logs
-- Count timeouts, failures, and exceptions
-- Extract affected services
-- Extract failed API endpoints
-- Extract IDs such as order_id, userId, and payment_id
-- Detect repeated log messages
-- Generate suggested debugging actions
+The goal of this project is to show how AI can support real software engineering workflows beyond a basic chatbot.
+
+## Why I Built This
+
+I wanted to build a project that connects AI with backend and production debugging work.
+
+Instead of creating a generic chatbot, this project focuses on a real engineering use case:
+
+- Production log analysis
+- Incident pattern detection
+- Similar incident retrieval
+- Root cause analysis
+- Evidence-backed recommendations
+
+This helped me learn how modern AI applications combine deterministic backend logic, vector search, and LLM-powered generation.
 
 ## Tech Stack
+
+### Frontend
+
 - Next.js
+- React
 - TypeScript
 - Tailwind CSS
+- Lucide React
+
+### Backend
+
+- Next.js API Routes
+- TypeScript
+- Server-side request handling
+
+### Database and Vector Search
+
+- Supabase
+- PostgreSQL
+- pgvector
+
+### AI
+
+- Gemini API
+- Gemini embeddings
+- Gemini text generation
+
+### Deployment
+
 - Vercel
 
-## Planned Features
-- RAG-based similar incident search
-- Supabase PostgreSQL and pgvector
-- Gemini API-powered RCA summary
-- Agent-style root cause analysis workflow
+## Core Features
 
+### 1. Log Error Analyzer
+
+The app accepts raw application logs and extracts useful debugging signals.
+
+It detects:
+
+- Total log lines
+- Error count
+- Warning count
+- Timeout count
+- Failure count
+- Exception count
+- Affected services
+- Failed API endpoints
+- IDs such as order_id, userId, payment_id
+- Repeated log messages
+- Suggested debugging actions
+
+Example log:
+
+```txt
+2026-05-16 10:12:44 ERROR PaymentService timeout while calling /api/payments
+2026-05-16 10:13:01 ERROR PaymentService timeout while calling /api/payments
+2026-05-16 10:14:10 WARN Retry attempt failed for order_id=1021
+```
 ----
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
