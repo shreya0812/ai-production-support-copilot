@@ -1,5 +1,7 @@
+import { generateRCAReport } from "@/lib/gemini";
 import { searchSimilarIncidents } from "@/lib/incidentSearch";
 import { analyzeLogs } from "@/lib/logParser";
+import { buildRCAPrompt } from "@/lib/rcaPrompt";
 
 export async function POST(request: Request) {
   try {
@@ -15,26 +17,30 @@ export async function POST(request: Request) {
 
     const analysis = analyzeLogs(logText);
 
-    const { searchText, matches } = await searchSimilarIncidents(
+    const { matches } = await searchSimilarIncidents(logText, analysis, {
+      matchCount: 3,
+      matchThreshold: 0.2,
+    });
+
+    const prompt = buildRCAPrompt({
       logText,
       analysis,
-      {
-        matchCount: 3,
-        matchThreshold: 0.2,
-      }
-    );
+      matches,
+    });
+
+    const rcaReport = await generateRCAReport(prompt);
 
     return Response.json({
       success: true,
       analysis,
-      searchText,
       matches,
+      rcaReport,
     });
   } catch {
     return Response.json(
       {
         success: false,
-        error: "Failed to search similar incidents.",
+        error: "Failed to generate RCA report.",
       },
       { status: 500 }
     );

@@ -1,4 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
+import type { RCAReport } from "@/types/rca";
 
 const geminiApiKey = process.env.GEMINI_API_KEY;
 
@@ -32,4 +33,33 @@ export async function createEmbedding(text: string): Promise<number[]> {
   }
 
   return embedding;
+}
+
+export async function generateRCAReport(prompt: string): Promise<RCAReport> {
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+    config: {
+      temperature: 0.2,
+      responseMimeType: "application/json",
+    },
+  });
+
+  const text = response.text?.trim();
+
+  if (!text) {
+    throw new Error("Gemini did not return RCA report text.");
+  }
+
+  return parseGeminiJson<RCAReport>(text);
+}
+
+function parseGeminiJson<T>(text: string): T {
+  const cleanedText = text
+    .replace(/^```json/i, "")
+    .replace(/^```/i, "")
+    .replace(/```$/i, "")
+    .trim();
+
+  return JSON.parse(cleanedText) as T;
 }
